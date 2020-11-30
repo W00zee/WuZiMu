@@ -1,54 +1,21 @@
 <?php
 
-Class A {
-    public function solve($a, $b) {
+require 'core/EquationInterface.php';
+require 'core/LogInterface.php';
+require 'core/LogAbstract.php';
 
-            if($a == 0) {
-                return NULL;
-            }
-            return $this->X=-($b/$a);
-    }
+require 'levkina/LinearEquation.php';
+require 'levkina/QuadraticEquation.php';
+require 'levkina/MyLog.php';
 
-    protected $X;
+$equation = new levkina\QuadraticEquation();
+try
+{
+    $result = $equation->solve(5, 14, 4);
+    $str = implode("; ", $result);
+    levkina\MyLog::Instance()::log($str);
 }
-
-Class B extends A {
-
-    protected function dis($a, $b, $c) {
-        $x = ($b**2)-4*$a*$c;
-        return $x;
-    }
-
-    public function qu_solve($a, $b, $c) {
-
-        $x = $this->dis($a, $b, $c);
-
-        if($a == 0){
-            return $this->solve($b,$c);
-        }
-
-
-
-        if ($x > 0) {
-            return $this->X=array(
-                    -($b+sqrt($b**2-4*$a*$c)/2*$a),
-                    -($b-sqrt($b**2-4*$a*$c)/2*$a)
-                    );
-            }
-
-            if($x == 0) {
-                return $this->X=array(-($b/2*$a));
-            }
-
-            return $this->X=NULL;
-
-    }
-
+catch (Error $error)
+{
+    levkina\MyLog::Instance()::log($error->getMessage());
 }
-
-$a = new A();
-$b = new B();
-$a->solve(1,2);
-$b->qu_solve(0,2,1);
-
-?>
