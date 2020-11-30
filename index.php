@@ -1,21 +1,41 @@
 <?php
 
-require 'core/EquationInterface.php';
-require 'core/LogInterface.php';
-require 'core/LogAbstract.php';
+use levkina\LevkinaException;
 
-require 'levkina/LinearEquation.php';
-require 'levkina/QuadraticEquation.php';
-require 'levkina/MyLog.php';
+include "core/EquationInterface.php";
+include "core/LogAbstract.php";
+include "core/LogInterface.php";
+include "levkina/MyLog.php";
+include "levkina/LinearEquation.php";
+include "levkina/QuadraticEquation.php";
+include "levkina/LevkinaException.php";
 
-$equation = new levkina\QuadraticEquation();
-try
-{
-    $result = $equation->solve(5, 14, 4);
-    $str = implode("; ", $result);
-    levkina\MyLog::Instance()::log($str);
+ini_set("display_errors", 1);
+error_reporting (-1);
+
+$b = new \levkina\QuLinearEquation();
+
+try{
+
+    $values = array();
+
+    for($i=1; $i<4; $i++){
+        echo "Введите ".$i." аргумент: ";
+        $values[]=readline();
+    }
+    $va = $values[0];
+    $vb = $values[1];
+    $vc = $values[2];
+
+    \levkina\MyLog::log("Введено уравнение ".$va."x^2 + ".$vb."x + ".$vc);
+    $x = $b->qu_solve($va,$vb,$vc);
+
+    $str = implode(", ", $x);
+    \levkina\MyLog::log("Корни уравнения: ".$str);
+}catch(LevkinaException $e){
+    \levkina\MyLog::log($e->getMessage());
 }
-catch (Error $error)
-{
-    levkina\MyLog::Instance()::log($error->getMessage());
-}
+
+\levkina\MyLog::write();
+
+?>

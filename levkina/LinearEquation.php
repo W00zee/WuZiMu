@@ -1,19 +1,16 @@
-<?php
+<?php namespace levkina;
 
-namespace levkina;
-
-
-
-class LinearEquation
-{
-    public function LinearEquation($a, $b)
-    {
-        if ($a == 0) {
-            throw new \Error('Equation doesn`t exist');
-        }
-
-        return $this->x = [$b * (-1) / $a];
-    }
-
-    protected $x;
+Class LinearEquation{
+	public function solve($a, $b){
+			
+			if($a == 0){
+                throw new LevkinaException("Ошибка: уравнения не существует.");
+			}
+            \levkina\MyLog::log("Определено, что это линейное уравнение");
+			return $this->X=array(-($b/$a));
+	}
+	
+	protected $X;
 }
+
+?>

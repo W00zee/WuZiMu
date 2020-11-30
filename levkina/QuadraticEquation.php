@@ -1,37 +1,36 @@
-<?php
-
-namespace levkina;
+<?php namespace levkina;
 
 use core\EquationInterface;
 
-class QuadraticEquation extends LinearEquation implements EquationInterface
-{
+Class QuadraticEquation extends LinearEquation implements EquationInterface{
+	
+	protected function dis($a, $b, $c){
+		return ($b**2)-4*$a*$c;
+		}
+	
+	public function qu_solve($a, $b, $c){
 
-    protected function Discriminant($a, $b, $c)
-    {
-        return $b * $b - 4 * $a * $c;
-    }
+		$x = $this->dis($a, $b, $c);
 
-    public function solve($a, $b, $c)
-    {
-        if ($a == 0)
-        {
-            return $this->LinearEquation($b, $c);
-        }
+	    if($a == 0){
+	        return $this->solve($b,$c);
+	    }
+        \levkina\MyLog::log("Определено, что это квадратное уравнение");
+		if ($x > 0){
+		    return $this->X=array(
+		        (-$b+sqrt($x))/(2*$a),
+                (-$b-sqrt($x))/(2*$a)
+		        );
+		}
+		
+		if($x == 0){
+			return $this->X=array(-($b/(2*$a)));
+		}
 
-        $d = $this->Discriminant($a, $b, $c);
-
-        if ($d == 0)
-        {
-            return $this->x = ($b * (-1)) / (2 * $a);
-        }
-
-        if ($d < 0)
-        {
-            throw new \Error('Equation doesn`t exist');
-        }
-
-        return $this->x = [($b * (-1) - sqrt($d)) / (2 * $a), ($b * (-1) + sqrt($d)) / (2 * $a)];
-    }
-
+		throw new LevkinaException("Ошибка: уравнение не имеет корней.");
+		
+	}
+	
 }
+
+?>
