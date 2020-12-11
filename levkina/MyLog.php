@@ -18,10 +18,20 @@ Class MyLog extends LogAbstract implements LogInterface {
 	}
     
     public function _write(){
-        
-        foreach($this->log as $value){
-            echo $value."\n";
+		
+$log='';
+        if (!is_dir("log")) {
+            mkdir("log");
         }
+
+        foreach (LevkinaLog::$i->log as $value) {
+            $log .= $value."\n\r";
+        }
+        echo $log;
+
+        $d = new \DateTime();
+        $logFileName = "log/".$d->format('d.m.Y_H.i.s.ms').".log";
+        file_put_contents($logFileName, implode("\n", $this->log));
         
     }
     

@@ -16,7 +16,7 @@ error_reporting (-1);
 $b = new \levkina\QuLinearEquation();
 
 try{
-
+\levkina\MyLog::log("Версия программы ". file_get_contents('./version'));
     $values = array();
 
     for($i=1; $i<4; $i++){
