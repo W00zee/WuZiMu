@@ -1,0 +1,21 @@
+{
+    "name": "w00zee/wuzimu",
+    "type": "project",
+    "license": "MIT",
+    "scripts": {
+        "post-install-cmd": "git symbolic-ref --short -q HEAD > version"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/W00zee/SaintWoozee.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/rok9ru/trpo-core.git"
+        }
+    ],
+    "require": {
+        "w00zee/saintwoozee": "^1.0"
+    }
+}
