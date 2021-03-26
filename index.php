@@ -22,6 +22,13 @@ try{
     $vc = $values[2];
 
     \levkina\MyLog::log("Введено уравнение ".$va."x^2 + ".$vb."x + ".$vc);
+	
+	if ($va == 0) {
+		\levkina\MyLog::log("Определено, что это линейное уравнение");
+	} else {
+		\levkina\MyLog::log("Определено, что это квадратное уравнение");
+	}
+	
     $x = $b->solve($va,$vb,$vc);
 
     $str = implode(", ", $x);
